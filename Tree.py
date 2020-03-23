@@ -48,6 +48,19 @@ class Node:
             else:
                 return False
 
+    def _insert(self, data):
+        if data < self.data:
+            if self.left:
+                self.left._insert(data)
+            else:
+                self.left = Node(data)
+
+        elif data > self.data:
+            if self.right:
+                self.right._insert(data)
+            else:
+                self.right = Node(data)
+
 
 class BST:
     def __init__(self):
@@ -57,20 +70,7 @@ class BST:
         if self.root == None:
             self.root = Node(data)
         else:
-            self._insert(data, self.root)
-
-    def _insert(self, data, current):
-        if data < current.data:
-            if current.left:
-                self._insert(data, current.left)
-            else:
-                current.left = Node(data)
-
-        elif data > current.data:
-            if current.right:
-                self._insert(data, current.right)
-            else:
-                current.right = Node(data)
+            self.root._insert(data)
 
     def preorder_dfs(self):
         self.root._preorder()
